@@ -13,7 +13,7 @@ function last_commit {
 function number_of_commits {
   git_history | wc -l
 }
- 
+
 function legible_output {
   # $2:   filename
   # $1:   lines of code
@@ -28,7 +28,7 @@ function legible_output {
 }
 
 function lines_of_code {
-  echo $(wc -l $1) | sed 's/\(\/.*\)[ ]/\1_/'
+  echo $(wc -l $1) | sed 's/\(\/.*\)[ ]/\1_/' | perl -pWe 's/(?<=( ))(.*?)\1/$2_/g'
 }
 
 function csv_lines_for {
@@ -59,4 +59,3 @@ function create_csv {
 cd $1
 create_csv ${@:2:$#}
 cd -
-
